@@ -7,6 +7,8 @@
   "attribute.name.additionalentityattributes.generic.lung_capacity.desc": "Increases the time before suffocating",
   "attribute.name.additionalentityattributes.generic.jump_height": "Jump Height",
   "attribute.name.additionalentityattributes.generic.jump_height.desc": "Increases jump height",
+  "attribute.name.additionalentityattributes.generic.magic_protection": "Magic Protection",
+  "attribute.name.additionalentityattributes.generic.magic_protection.desc": "Decreases damage from magical damage sources",
 
   "attribute.name.additionalentityattributes.player.critical_bonus_damage": "Crit Damage",
   "attribute.name.additionalentityattributes.player.critical_bonus_damage.desc": "Increases Damage when dealing critical hits",
@@ -22,8 +24,6 @@
   "attribute.name.additionalentityattributes.player.bonus_loot_count_rolls.desc": "Increases chance for a high amount of drops on variable count drops",
   "attribute.name.additionalentityattributes.player.dropped_experience": "Dropped Experience",
   "attribute.name.additionalentityattributes.player.dropped_experience.desc": "Increases experience drops by blocks and kills",
-  "attribute.name.additionalentityattributes.player.magic_protection": "Magic Protection",
-  "attribute.name.additionalentityattributes.player.magic_protection.desc": "Decreases damage from magical damage sources",
   "attribute.name.additionalentityattributes.player.collection_range": "Collection Range",
   "attribute.name.additionalentityattributes.player.collection_range.desc": "Influences the range where you pick up stuff around you"
 }
