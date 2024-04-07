@@ -35,7 +35,7 @@ public class AdditionalEntityAttributes implements ModInitializer {
 	 * For the sake of maneuverability and server performance it is capped at 1.
 	 * Stacks with dolphins grace and depth strider, albeit the latter has little felt effect at higher speeds.
 	 */
-	public static final EntityAttribute WATER_SPEED = register("water_speed", 0.5, 0, 1);
+	public static final EntityAttribute WATER_SPEED = register("generic.water_speed", 0.5, 0, 1);
 	
 	/**
 	 * Controls the vision of the player when in water by adjusting the fog distance
