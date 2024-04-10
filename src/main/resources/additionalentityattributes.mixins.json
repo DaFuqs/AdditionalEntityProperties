@@ -12,9 +12,6 @@
     "common.RandomChanceLootConditionMixin",
     "common.RandomChanceWithLootingLootConditionMixin"
   ],
-  "client": [
-    "client.BackgroundRendererMixin"
-  ],
   "injectors": {
     "defaultRequire": 1
   }

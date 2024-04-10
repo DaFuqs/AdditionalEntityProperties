@@ -15,6 +15,8 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.material.Fluid;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
@@ -28,53 +30,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
 
-    @Shadow
-    @Nullable
-    protected Player lastHurtByPlayer;
-
-
-    @SubscribeEvent
-    public void livingEntityAttributes(EntityAttributeModificationEvent e) {
-        for (EntityType<? extends LivingEntity> living : e.getTypes()) {
-//            e.add(living, AdditionalEntityAttributes.WATER_SPEED.get());
-            e.add(living, AdditionalEntityAttributes.LAVA_SPEED.get());
-            e.add(living, AdditionalEntityAttributes.LUNG_CAPACITY.get());
-            e.add(living, AdditionalEntityAttributes.JUMP_HEIGHT.get());
-            e.add(living, AdditionalEntityAttributes.MAGIC_PROTECTION.get());
-        }
-    }
-
-    @ModifyExpressionValue(method = "swimUpward", at = @At(value = "CONSTANT", args = "doubleValue=0.03999999910593033D"))
-    public double additionalEntityAttributes$modifyUpwardSwimming(double original, TagKey<Fluid> fluid) {
-        if (fluid == FluidTags.WATER) {
-            AttributeInstance waterSpeed = ((LivingEntity) (Object) this).getAttributeInstance(AdditionalEntityAttributes.WATER_SPEED);
-            if (waterSpeed == null) {
-                return original;
-            } else {
-                if (waterSpeed.getBaseValue() != original) {
-                    waterSpeed.setBaseValue(original);
-                }
-                return waterSpeed.getValue();
-            }
-        } else {
-            return original;
-        }
-    }
-
-    @Environment(EnvType.CLIENT)
-    @ModifyExpressionValue(method = "knockDownwards", at = @At(value = "CONSTANT", args = "doubleValue=-0.03999999910593033D"))
-    public double additionalEntityAttributes$knockDownwards(double original) {
-        AttributeInstance waterSpeed = ((LivingEntity) (Object) this).getAttributeInstance(AdditionalEntityAttributes.WATER_SPEED);
-        if (waterSpeed == null) {
-            return original;
-        } else {
-            if (waterSpeed.getBaseValue() != -original) {
-                waterSpeed.setBaseValue(-original);
-            }
-            return -waterSpeed.getValue();
-        }
-    }
-
     @ModifyExpressionValue(method = "travel", at = {@At(value = "CONSTANT", args = "doubleValue=0.5D", ordinal = 0), @At(value = "CONSTANT", args = "doubleValue=0.5D", ordinal = 1), @At(value = "CONSTANT", args = "doubleValue=0.5D", ordinal = 2)})
     private double additionalEntityAttributes$increasedLavaSpeed(double original) {
         AttributeInstance lavaSpeed = ((LivingEntity) (Object) this).getAttribute(AdditionalEntityAttributes.LAVA_SPEED.get());
@@ -85,13 +40,6 @@ public abstract class LivingEntityMixin {
                 lavaSpeed.setBaseValue(original);
             }
             return lavaSpeed.getValue();
-        }
-    }
-
-    @SubscribeEvent
-    public void onLivingExperienceDrop(LivingExperienceDropEvent e) {
-        if (!(e.getAttackingPlayer() == null)) {
-            e.setDroppedExperience((int) (e.getDroppedExperience() * Support.getExperienceMod(e.getAttackingPlayer())));
         }
     }
 

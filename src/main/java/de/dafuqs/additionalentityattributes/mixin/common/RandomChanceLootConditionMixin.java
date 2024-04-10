@@ -18,15 +18,15 @@ public abstract class RandomChanceLootConditionMixin {
 
 	@Shadow
 	@Final
-	private float chance;
+	private float probability;
 
 	@Inject(at = @At("RETURN"), method = "test(Lnet/minecraft/world/level/storage/loot/LootContext;)Z", cancellable = true)
 	public void additionalEntityAttributes$applyBonusLoot(LootContext lootContext, CallbackInfoReturnable<Boolean> cir) {
 		// if the result was to not drop a drop before reroll
-		if (!cir.getReturnValue() && this.chance < 1.0F && lootContext.getParamOrNull(LootContextParams.KILLER_ENTITY) instanceof LivingEntity livingEntity) {
+		if (!cir.getReturnValue() && this.probability < 1.0F && lootContext.getParamOrNull(LootContextParams.KILLER_ENTITY) instanceof LivingEntity livingEntity) {
 			AttributeInstance attributeInstance = livingEntity.getAttribute(AdditionalEntityAttributes.BONUS_RARE_LOOT_ROLLS.get());
 			if (attributeInstance != null) {
-				cir.setReturnValue(lootContext.getRandom().nextFloat() < this.chance * (float) attributeInstance.getValue());
+				cir.setReturnValue(lootContext.getRandom().nextFloat() < this.probability * (float) attributeInstance.getValue());
 			}
 		}
 	}

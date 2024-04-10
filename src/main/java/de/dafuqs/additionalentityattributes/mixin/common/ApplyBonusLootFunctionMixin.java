@@ -20,10 +20,10 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 @Mixin(ApplyBonusCount.class)
 public abstract class ApplyBonusLootFunctionMixin {
 
-//	@Shadow
-//	@Final
-//	private ApplyBonusCount.Formula formula;
-//todo AT
+	@Shadow
+	@Final
+	private ApplyBonusCount.Formula formula;
+
 	@Shadow
 	@Final
 	private Holder<Enchantment> enchantment;
@@ -42,8 +42,8 @@ public abstract class ApplyBonusLootFunctionMixin {
 					int bonusRollCount = (int) attributeInstance.getValue();
 					int highestRoll = oldValue;
 					for (int i = 0; i < bonusRollCount; i++) {
-//						int thisRoll = this.formula.calculateNewCount(context.getRandom(), stack.getCount(), enchantmentLevel);
-//						highestRoll = Math.max(highestRoll, thisRoll);
+						int thisRoll = this.formula.calculateNewCount(context.getRandom(), stack.getCount(), enchantmentLevel);
+						highestRoll = Math.max(highestRoll, thisRoll);
 					}
 					return highestRoll;
 				}

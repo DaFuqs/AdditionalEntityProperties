@@ -4,11 +4,15 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -126,5 +130,19 @@ public class AdditionalEntityAttributes {
 
 	public AdditionalEntityAttributes(IEventBus modBus) {
 		ATTRIBUTES.register(modBus);
+		modBus.addListener(this::registerPlayerAttributes);
+		NeoForge.EVENT_BUS.register(new AdditionalEntityAttributesEvents());
+	}
+
+	@SubscribeEvent
+	public void registerPlayerAttributes(EntityAttributeModificationEvent e) {
+		e.add(EntityType.PLAYER, AdditionalEntityAttributes.WATER_VISIBILITY.get());
+		e.add(EntityType.PLAYER, AdditionalEntityAttributes.LAVA_VISIBILITY.get());
+		e.add(EntityType.PLAYER, AdditionalEntityAttributes.CRITICAL_BONUS_DAMAGE.get());
+		e.add(EntityType.PLAYER, AdditionalEntityAttributes.DIG_SPEED.get());
+		e.add(EntityType.PLAYER, AdditionalEntityAttributes.BONUS_LOOT_COUNT_ROLLS.get());
+		e.add(EntityType.PLAYER, AdditionalEntityAttributes.BONUS_RARE_LOOT_ROLLS.get());
+		e.add(EntityType.PLAYER, AdditionalEntityAttributes.DROPPED_EXPERIENCE.get());
+		e.add(EntityType.PLAYER, AdditionalEntityAttributes.COLLECTION_RANGE.get());
 	}
 }
