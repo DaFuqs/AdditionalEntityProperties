@@ -1,24 +1,23 @@
 package de.dafuqs.additionalentityattributes;
 
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
-import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 @Mod(AdditionalEntityAttributes.MOD_ID)
 public class AdditionalEntityAttributes {
-	
+
 	public static final String MOD_ID = "additionalentityattributes";
 	
 	/*
@@ -45,11 +44,12 @@ public class AdditionalEntityAttributes {
 	
 	/**
 	 * Controls the speed of the player when in water
-	 * The base value of this DeferredHolder<Attribute, Attribute> is always set dynamically, therefore setting it via a command will have no effect.
+	 * The base value of this Holder<Attribute> is always set dynamically, therefore setting it via a command will have no effect.
 	 * For the sake of maneuverability and server performance it is capped at 1.
 	 * Stacks with dolphins grace and depth strider, albeit the latter has little felt effect at higher speeds.
 	 */
-	public static final DeferredHolder<Attribute, Attribute> WATER_SPEED = register("generic.water_speed", 0.5, 0, 1);
+	@Deprecated
+	public static final Holder<Attribute> WATER_SPEED = NeoForgeMod.SWIM_SPEED;
 
 	/**
 	 * Controls the vision of the player when in water by adjusting the fog distance
@@ -125,12 +125,12 @@ public class AdditionalEntityAttributes {
 
 	private static DeferredHolder<Attribute, Attribute> register(final String name, double base, double min, double max) {
 		Attribute attribute = new RangedAttribute("attribute.name." + MOD_ID + '.' + name, base, min, max).setSyncable(true);
-        return ATTRIBUTES.register("attribute.name." + MOD_ID + '.' + name, () -> attribute);
+        return ATTRIBUTES.register(name, () -> attribute);
 	}
 
 	public AdditionalEntityAttributes(IEventBus modBus) {
 		ATTRIBUTES.register(modBus);
-		modBus.addListener(this::registerPlayerAttributes);
+		modBus.register(this);
 		NeoForge.EVENT_BUS.register(new AdditionalEntityAttributesEvents());
 	}
 
@@ -144,5 +144,15 @@ public class AdditionalEntityAttributes {
 		e.add(EntityType.PLAYER, AdditionalEntityAttributes.BONUS_RARE_LOOT_ROLLS.get());
 		e.add(EntityType.PLAYER, AdditionalEntityAttributes.DROPPED_EXPERIENCE.get());
 		e.add(EntityType.PLAYER, AdditionalEntityAttributes.COLLECTION_RANGE.get());
+	}
+
+	@SubscribeEvent
+	public void registerLivingEntityAttributes(EntityAttributeModificationEvent e) {
+		for (EntityType<? extends LivingEntity> living : e.getTypes()) {
+			e.add(living, AdditionalEntityAttributes.LAVA_SPEED.get());
+			e.add(living, AdditionalEntityAttributes.LUNG_CAPACITY.get());
+			e.add(living, AdditionalEntityAttributes.JUMP_HEIGHT.get());
+			e.add(living, AdditionalEntityAttributes.MAGIC_PROTECTION.get());
+		}
 	}
 }

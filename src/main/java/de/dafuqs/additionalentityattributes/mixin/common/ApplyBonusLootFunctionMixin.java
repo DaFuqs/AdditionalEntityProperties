@@ -7,7 +7,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -28,14 +27,14 @@ public abstract class ApplyBonusLootFunctionMixin {
 	@Final
 	private Holder<Enchantment> enchantment;
 
-	@ModifyVariable(method = "run", at = @At("STORE"), ordinal = 1)
+	@ModifyVariable(method = "run", at = @At(value = "STORE"), ordinal = 1)
 	public int additionalEntityAttributes$applyBonusLoot(int oldValue, ItemStack stack, LootContext context) {
 		// if the player has the ANOTHER_DRAW effect the bonus loot of
 		// this function gets rerolled potency+1 times and the best one taken
 		ItemStack itemStack = context.getParamOrNull(LootContextParams.TOOL);
 		Entity entity = context.getParamOrNull(LootContextParams.THIS_ENTITY);
 		if (itemStack != null && entity instanceof LivingEntity livingEntity) {
-			int enchantmentLevel = EnchantmentHelper.getItemEnchantmentLevel(this.enchantment.value(), itemStack);
+			int enchantmentLevel = itemStack.getEnchantmentLevel(this.enchantment.value());
 			if (enchantmentLevel > 0) {
 				AttributeInstance attributeInstance = livingEntity.getAttribute(AdditionalEntityAttributes.BONUS_LOOT_COUNT_ROLLS.get());
 				if (attributeInstance != null) {
