@@ -40,7 +40,7 @@ public abstract class BackgroundRendererMixin {
 	
 	@ModifyExpressionValue(method = "applyFog", at = @At(value = "CONSTANT", args = "floatValue=0.0F", ordinal = 0))
 	private static float additionalEntityAttributes$modifyLavaVisibilityMinFireResistance(float original, Camera camera) {
-		EntityAttributeInstance lavaVisibilityAttribute = MinecraftClient.getInstance().player.getAttributeInstance(AdditionalEntityAttributes.LAVA_VISIBILITY);
+		AttributeInstance lavaVisibilityAttribute = Minecraft.getInstance().player.getAttribute(AdditionalEntityAttributes.LAVA_VISIBILITY.get());
 		if (lavaVisibilityAttribute == null) {
 			return original;
 		} else {
@@ -53,7 +53,7 @@ public abstract class BackgroundRendererMixin {
 	
 	@ModifyExpressionValue(method = "applyFog", at = @At(value = "CONSTANT", args = "floatValue=3.0F", ordinal = 0))
 	private static float additionalEntityAttributes$modifyLavaVisibilityMaxWithFireResistance(float original, Camera camera) {
-		EntityAttributeInstance lavaVisibilityAttribute = MinecraftClient.getInstance().player.getAttributeInstance(AdditionalEntityAttributes.LAVA_VISIBILITY);
+		AttributeInstance lavaVisibilityAttribute = Minecraft.getInstance().player.getAttribute(AdditionalEntityAttributes.LAVA_VISIBILITY.get());
 		if (lavaVisibilityAttribute == null) {
 			return original;
 		} else {
@@ -66,7 +66,7 @@ public abstract class BackgroundRendererMixin {
 	
 	@ModifyExpressionValue(method = "applyFog", at = @At(value = "CONSTANT", args = "floatValue=96F", ordinal = 0))
 	private static float additionalEntityAttributes$modifyWaterVisibility(float original, Camera camera) {
-		EntityAttributeInstance waterVisibilityAttribute = MinecraftClient.getInstance().player.getAttributeInstance(AdditionalEntityAttributes.WATER_VISIBILITY);
+		AttributeInstance waterVisibilityAttribute = Minecraft.getInstance().player.getAttribute(AdditionalEntityAttributes.WATER_VISIBILITY.get());
 		if (waterVisibilityAttribute == null) {
 			return original;
 		} else {
