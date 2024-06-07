@@ -3,6 +3,7 @@
   "minVersion": "0.8",
   "package": "de.dafuqs.additionalentityattributes.mixin",
   "compatibilityLevel": "JAVA_17",
+  "plugin": "de.dafuqs.additionalentityattributes.mixin.compat.Plugin",
   "mixins": [
     "common.ApplyBonusLootFunctionMixin",
     "common.BlockMixin",
@@ -13,7 +14,9 @@
     "common.RandomChanceWithLootingLootConditionMixin"
   ],
   "client": [
-    "client.BackgroundRendererMixin"
+    "client.BackgroundRendererMixin",
+    "compat.connectormod.absent.ClientLivingEntityMixin",
+    "compat.connectormod.present.ClientLivingEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
