@@ -28,7 +28,8 @@ These attributes allow mod compatibility and serve as an API for mods that make 
 - `BONUS_LOOT_COUNT_ROLLS` (player only): Controls the number of drops the player receives when using enchantments such
   as Loot and Luck
 - `BONUS_RARE_LOOT_ROLLS` (player only): The number of times the chance-based loot table is rolled
-
+- `COLLECTION_RANGE` (player only): Controls the distance where the player is able to collect ("touch") entity types in
+  the `additionalentityattributes:affected_by_collection_range` tag (like items & experience orbs)
 
 ### Entity Type Tags
 
