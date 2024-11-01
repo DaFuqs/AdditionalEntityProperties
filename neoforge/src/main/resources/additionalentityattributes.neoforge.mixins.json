@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "de.dafuqs.additionalentityattributes.mixin.neoforge",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "ILivingEntityExtensionMixin"
+  ],
+  "client": [
+  ],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

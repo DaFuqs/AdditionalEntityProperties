@@ -1,0 +1,38 @@
+plugins {
+    id 'additionalentityattributes-common'
+    id 'net.neoforged.moddev'
+}
+
+neoForge {
+    neoFormVersion = neoform_version
+    // Automatically enable AccessTransformers if the file exists
+    def at = file("src/main/resources/${mod_id}.cfg")
+    if (at.exists()) {
+        setAccessTransformers(at)
+    }
+    parchment {
+        minecraftVersion = parchment_minecraft
+        mappingsVersion = parchment_version
+    }
+}
+
+dependencies {
+    compileOnly("net.fabricmc:sponge-mixin:0.15.3+mixin.0.8.7")
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.1"))
+}
+
+configurations {
+    commonJava {
+        canBeResolved = false
+        canBeConsumed = true
+    }
+    commonResources {
+        canBeResolved = false
+        canBeConsumed = true
+    }
+}
+
+artifacts {
+    commonJava sourceSets.main.java.sourceDirectories.singleFile
+    commonResources sourceSets.main.resources.sourceDirectories.singleFile
+}

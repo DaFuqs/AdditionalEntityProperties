@@ -1,0 +1,31 @@
+modLoader = "javafml"
+loaderVersion = "${neoforge_loader_version_range}"
+license = "MIT"
+
+[[mods]]
+modId = "additionalentityattributes"
+version = "${version}"
+displayName = "Additional Entity Attributes"
+displayURL="https://github.com/DaFuqs/AdditionalEntityAttributes"
+logoFile="additionalentityattributes.png"
+credits="Apace100, Noaaan"
+authors = "DaFuqs, MerchantPug"
+description = '''Additional Entity Attributes'''
+[[mixins]]
+config = "additionalentityattributes.mixins.json"
+[[mixins]]
+config = "additionalentityattributes.neoforge.mixins.json"
+
+[[dependencies.additionalentityattributes]]
+modId = "neoforge"
+type="required"
+versionRange = "${neoforge_version_range}"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.additionalentityattributes]]
+modId = "minecraft"
+type="required"
+versionRange = "${neoforge_minecraft_version_range}"
+ordering = "NONE"
+side = "BOTH"
