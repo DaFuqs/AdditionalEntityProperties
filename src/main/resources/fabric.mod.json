@@ -19,9 +19,6 @@
   "entrypoints": {
     "main": [
       "de.dafuqs.additionalentityattributes.AdditionalEntityAttributes"
-    ],
-    "preLaunch": [
-      "com.llamalad7.mixinextras.MixinExtrasBootstrap::init"
     ]
   },
   "accessWidener": "additionalentityattributes.accesswidener",
@@ -29,8 +26,8 @@
     "additionalentityattributes.mixins.json"
   ],
   "depends": {
-    "fabricloader": "*",
+    "fabricloader": ">=0.15.6",
     "fabric-api": "*",
-    "minecraft": ">=1.20.0"
+    "minecraft": ">=1.20.1"
   }
 }
