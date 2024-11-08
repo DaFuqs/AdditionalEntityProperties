@@ -12,7 +12,7 @@ These attributes allow mod compatibility and serve as an API for mods that make 
 - `JUMP_HEIGHT` (living entities): Controls the jump height of the player.
 - `DROPPED_EXPERIENCE` (living entities): Changes the amount of experience dropped from mining blocks and killing mobs.
 - `MAGIC_PROTECTION` (living entities): Reduces the amount of magic damage taken.
-
+- `MOB_DETECTION_RANGE` (living entities): Controls the range that the player can be detected by hostile mobs.
 
 - `WATER_VISIBILITY` (player only): Controls the player's visibility in water by adjusting the fog distance.
 - `LAVA_VISIBILITY` (player only): Controls the player's visibility in lava by adjusting the fog distance.

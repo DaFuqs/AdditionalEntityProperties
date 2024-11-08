@@ -107,7 +107,12 @@ public class AdditionalEntityAttributes implements ModInitializer {
 	 * By default, the player has 0 points, and each point of reduces the damage taken by 1.
 	 */
 	public static final EntityAttribute COLLECTION_RANGE = register("player.collection_range", 0.0D, 0.0D, 64.0D);
-
+	
+	/**
+	 * Controls the range that the player can be detected by hostile mobs.
+	 * By default, this starts at 1.0, but may be different depending on a few factors.
+	 */
+	public static final EntityAttribute MOB_DETECTION_RANGE = register("generic.mob_detection_range", 0.0, 0.0, 1024.0);
 
 	private static EntityAttribute register(final String name, double base, double min, double max) {
 		EntityAttribute attribute = new ClampedEntityAttribute("attribute.name." + MOD_ID + '.' + name, base, min, max).setTracked(true);

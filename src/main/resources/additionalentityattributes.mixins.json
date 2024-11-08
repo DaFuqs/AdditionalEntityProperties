@@ -11,7 +11,8 @@
     "common.LivingEntityMixin",
     "common.PlayerEntityMixin",
     "common.RandomChanceLootConditionMixin",
-    "common.RandomChanceWithLootingLootConditionMixin"
+    "common.RandomChanceWithLootingLootConditionMixin",
+    "common.TargetPredicateMixin"
   ],
   "client": [
     "client.BackgroundRendererMixin",
