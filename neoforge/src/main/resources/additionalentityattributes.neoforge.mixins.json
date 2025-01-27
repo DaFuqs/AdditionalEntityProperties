@@ -4,7 +4,8 @@
   "package": "de.dafuqs.additionalentityattributes.mixin.neoforge",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "ILivingEntityExtensionMixin"
+    "ILivingEntityExtensionMixin",
+    "LivingEntityMixin"
   ],
   "client": [
   ],
